@@ -1,8 +1,7 @@
-const { Schema, model } = require('mongoose');
-
 const mongoose = require('mongoose');
 
 const profileObj = {
+  _id: String,
   basicInformation: {
     name: {
       type: String,
@@ -65,7 +64,7 @@ const profileObj = {
   professionalInformation: {
     education: {
       type: String,
-      enum: ['B.Tech', 'B.E'],
+      enum: ['education-1', 'education-2'],
     },
     college: [String],
     occupation: String,
@@ -107,6 +106,5 @@ const profileObj = {
   }
 }
 
-
-const profileSchema = new Schema(profileObj);
-module.exports = model('Profile', profileSchema);
+const profileSchema = new mongoose.Schema(profileObj);
+module.exports = mongoose.model('Profile', profileSchema);

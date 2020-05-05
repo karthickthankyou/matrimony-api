@@ -4,10 +4,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const userObj = {
-  name: {
-    type: String,
-    required: [true, 'Name is required']
-  },
   email: {
     type: String,
     required: [true, 'Email is required'],
