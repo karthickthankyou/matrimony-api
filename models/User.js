@@ -3,8 +3,6 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET, JWT_EXPIRE } = process.env;
-
 const userObj = {
   name: {
     type: String,
@@ -59,9 +57,8 @@ UserSchema.pre('save', async function (next) {
 
 
 UserSchema.methods.getSignedJwtToken = function () {
-  return jwt.sign({ id: this._id }, JWT_SECRET, { expiresIn: JWT_EXPIRE });
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
 }
-
 
 UserSchema.methods.matchPassword = function (enteredPassword) {
   return bcrypt.compare(enteredPassword, this.password);
