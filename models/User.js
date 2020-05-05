@@ -65,9 +65,9 @@ UserSchema.methods.matchPassword = function (enteredPassword) {
 }
 
 UserSchema.methods.getResetPasswordToken = function () {
-  const resetToken = crypto.randomBytes(20).toString('hex');
-  this.resetPasswordToken = crypto.createHash('SHA256').update(resetToken).digest('hex');
-  this.resetPasswordExpire = new Date() + 10 * 60 * 1000;
+  const resetToken = Math.random().toString(36).slice(-8);
+  this.resetPasswordToken = resetToken;
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
 }

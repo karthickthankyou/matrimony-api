@@ -1,6 +1,7 @@
 const asyncHandler = require('../middleware/async');
 const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
+const sendEmail = require('../utils/sendEmail');
 
 // @desc      Register user
 // @route     POST /api/v1/auth/register
@@ -81,6 +82,70 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 
   user.password = req.body.newPassword;
   await user.save();
+  sendTokenResponse(user, 200, res);
+})
+
+
+
+// @desc      Forgot password
+// @route     POST /api/v1/auth/forgotpassword
+// @access    Public
+exports.forgotPassword = asyncHandler(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return next(new ErrorResponse('There is no user with that email', 404));
+  }
+
+  // Get reset token
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  const message = `Passcode: \n\n ${resetToken}`;
+
+  res.status(200).json({ success: true, data: `Email sent ${message}` });
+
+  // try {
+  //   await sendEmail({
+  //     email: user.email,
+  //     subject: 'Password reset token',
+  //     message
+  //   });
+
+  //   res.status(200).json({ success: true, data: 'Email sent', token: resetToken });
+  // } catch (err) {
+  //   console.log(err);
+  //   user.resetPasswordToken = undefined;
+  //   user.resetPasswordExpire = undefined;
+
+  //   await user.save({ validateBeforeSave: false });
+
+  //   return next(new ErrorResponse('Email could not be sent', 500));
+  // }
+});
+
+exports.resetPassword = asyncHandler(async (req, res, next) => {
+  const { resetToken, password } = req.body;
+
+  const user = await User.findOne({
+    resetPasswordToken: resetToken,
+    resetPasswordExpire: { $gt: Date.now() }
+  });
+
+  console.log(user, Date.now());
+
+
+  if (!user) {
+    return next(new ErrorResponse('Invalid token', 400));
+  }
+
+  // Set new password
+  user.password = password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  await user.save();
+
   sendTokenResponse(user, 200, res);
 })
 
