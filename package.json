@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server"
+    "start": "NODE_ENV=production node server",
+    "dev": "nodemon server"
   },
   "keywords": [],
   "author": "Karthick Ragavendran <karthickthankyou@gmail.com> (karthickr.me)",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.11",
+    "morgan": "^1.10.0",
     "slugify": "^1.4.0"
   },
   "devDependencies": {
