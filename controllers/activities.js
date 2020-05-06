@@ -31,7 +31,7 @@ exports.getInterests = asyncHandler(async (req, res, next) => {
   const interested = await Activity.find({ target: req.user.id, 'action': { $in: types } }).populate({
     path: 'viewerInfo',
     select: 'basicInformation.name'
-  });
+  }).sort({ updatedAt: -1 });
 
   res.status(200).json({
     success: true,
@@ -49,7 +49,41 @@ exports.getInterested = asyncHandler(async (req, res, next) => {
   const interested = await Activity.find({ viewer: req.user.id, 'action': { $in: types } }).populate({
     path: 'targetInfo',
     select: 'basicInformation.name'
+  }).sort({ updatedAt: -1 });
+
+  res.status(200).json({
+    success: true,
+    count: interested.length,
+    data: interested
   });
+})
+
+
+// @desc      Get interests
+// @route     GET /api/v1/interests/views
+// @access    Private/Admin
+exports.getViews = asyncHandler(async (req, res, next) => {
+  const interested = await Activity.find({ target: req.user.id, 'action': "viewed" }).populate({
+    path: 'targetInfo',
+    select: 'basicInformation.name'
+  }).sort({ updatedAt: -1 });
+
+  res.status(200).json({
+    success: true,
+    count: interested.length,
+    data: interested
+  });
+})
+
+
+// @desc      Get interests
+// @route     GET /api/v1/interests/myviews
+// @access    Private/Admin
+exports.getMyViews = asyncHandler(async (req, res, next) => {
+  const interested = await Activity.find({ viewer: req.user.id, 'action': "viewed" }).populate({
+    path: 'targetInfo',
+    select: 'basicInformation.name'
+  }).sort({ updatedAt: -1 });
 
   res.status(200).json({
     success: true,

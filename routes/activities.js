@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  getInterests, showInterest, getInterested
+  getInterests, showInterest, getInterested, getViews, getMyViews
 } = require('../controllers/activities');
 
 const { protect } = require('../middleware/auth');
@@ -11,5 +11,7 @@ router
   .post('/:id', protect, showInterest)
   .get('/', protect, getInterests)
   .get('/mine', protect, getInterested)
+  .get('/views', protect, getViews)
+  .get('/myviews', protect, getMyViews)
 
 module.exports = router;

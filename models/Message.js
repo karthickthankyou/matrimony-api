@@ -1,21 +1,20 @@
 const mongoose = require('mongoose');
 
-const activityObj = {
-  viewer: {
+const messageObj = {
+  from: {
     type: mongoose.Schema.ObjectId,
     ref: 'Profile',
     required: true
   },
-  target: {
+  to: {
     type: mongoose.Schema.ObjectId,
     ref: 'Profile',
     required: true
   },
-  action: {
+  message: {
     type: String,
-    enum: ['shortlisted', 'interested', 'viewed']
+    required: true,
   },
-  duration: Number,
   updatedAt: {
     type: Date,
     default: Date.now
@@ -25,20 +24,20 @@ const options = {
   toJSON: { virtuals: true }
 };
 
-const ActivitySchema = new mongoose.Schema(activityObj, options);
+const MessageSchema = new mongoose.Schema(messageObj, options);
 
-ActivitySchema.virtual('viewerInfo', {
+MessageSchema.virtual('viewerInfo', {
   ref: 'Profile',
   localField: "viewer",
   foreignField: '_id',
   justOne: true
 });
 
-ActivitySchema.virtual('targetInfo', {
+MessageSchema.virtual('targetInfo', {
   ref: 'Profile',
   localField: "target",
   foreignField: '_id',
   justOne: true
 });
 
-module.exports = mongoose.model('Activity', ActivitySchema);
+module.exports = mongoose.model('View', MessageSchema);
