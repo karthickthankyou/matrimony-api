@@ -5,7 +5,6 @@ const User = require('../models/User');
 
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
-  console.log('Hello protecting you!');
 
   let token;
 

@@ -26,12 +26,34 @@ exports.showInterest = asyncHandler(async (req, res, next) => {
 // @route     GET /api/v1/interests
 // @access    Private/Admin
 exports.getInterests = asyncHandler(async (req, res, next) => {
-  console.log("Get interests starts here!");
+  const types = req.body.type;
 
-  const interested = await Activity.find();
+  const interested = await Activity.find({ target: req.user.id, 'action': { $in: types } }).populate({
+    path: 'viewerInfo',
+    select: 'basicInformation.name'
+  });
 
   res.status(200).json({
     success: true,
+    count: interested.length,
+    data: interested
+  });
+})
+
+// @desc      Get interests
+// @route     GET /api/v1/interests/mine
+// @access    Private/Admin
+exports.getInterested = asyncHandler(async (req, res, next) => {
+  const types = req.body.type;
+
+  const interested = await Activity.find({ viewer: req.user.id, 'action': { $in: types } }).populate({
+    path: 'targetInfo',
+    select: 'basicInformation.name'
+  });
+
+  res.status(200).json({
+    success: true,
+    count: interested.length,
     data: interested
   });
 })

@@ -20,7 +20,24 @@ const activityObj = {
     default: Date.now
   }
 }
+const options = {
+  toJSON: { virtuals: true }
+};
 
-const ActivitySchema = new mongoose.Schema(activityObj);
+const ActivitySchema = new mongoose.Schema(activityObj, options);
+
+ActivitySchema.virtual('viewerInfo', {
+  ref: 'Profile',
+  localField: "viewer",
+  foreignField: '_id',
+  justOne: true
+});
+
+ActivitySchema.virtual('targetInfo', {
+  ref: 'Profile',
+  localField: "target",
+  foreignField: '_id',
+  justOne: true
+});
 
 module.exports = mongoose.model('Activity', ActivitySchema);
