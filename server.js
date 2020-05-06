@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const profiles = require('./routes/profiles');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const activies = require('./routes/activities');
 
 const { connectDB } = require('./config/db')
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use('/api/v1/profiles', profiles);
 app.use('/api/v1/users', users);
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/activities', activies);
 
 
 

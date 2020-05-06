@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Activity = require('../models/Activity');
 
 const asyncHandler = require('../middleware/async');
 

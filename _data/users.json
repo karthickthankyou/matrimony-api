@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "5d7a514b5d2c12c7449be043",
+    "password": "welcome35",
+    "email": "sample1@gmail.com",
+    "phone": "1111111111"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be044",
+    "password": "welcome35",
+    "email": "sample2@gmail.com",
+    "phone": "1111111112"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be045",
+    "password": "welcome35",
+    "email": "sample3@gmail.com",
+    "phone": "1111111113"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be046",
+    "password": "welcome35",
+    "email": "sample4@gmail.com",
+    "phone": "1111111114"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be047",
+    "password": "welcome35",
+    "email": "sample5@gmail.com",
+    "phone": "1111111115"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be048",
+    "password": "welcome35",
+    "email": "sample6@gmail.com",
+    "phone": "1111111116"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be049",
+    "password": "welcome35",
+    "email": "sample7@gmail.com",
+    "phone": "1111111117"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be050",
+    "password": "welcome35",
+    "email": "sample8@gmail.com",
+    "phone": "1111111118"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be051",
+    "password": "welcome35",
+    "email": "sample9@gmail.com",
+    "phone": "1111111119"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be052",
+    "password": "welcome35",
+    "email": "sample10@gmail.com",
+    "phone": "1111111120"
+  }
+]

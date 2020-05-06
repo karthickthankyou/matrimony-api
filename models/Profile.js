@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const profileObj = {
   _id: String,
+  gender: {
+    type: String,
+    enum: ['male', 'female'],
+    required: [true, 'Gender is required']
+  },
   basicInformation: {
     name: {
       type: String,
@@ -98,6 +103,10 @@ const profileObj = {
     required: [true, 'Please add about me.'],
     trum: true,
     maxlength: [500, 'About me cannot be more than 500 characters']
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   },
   user: {
     type: mongoose.Schema.ObjectId,

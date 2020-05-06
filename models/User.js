@@ -15,6 +15,8 @@ const userObj = {
   },
   phone: {
     type: String,
+    unique: true,
+    required: [true, 'Phone is required'],
     maxlength: [20, 'Phone number can not be longer than 20 characters']
   },
   role: {
