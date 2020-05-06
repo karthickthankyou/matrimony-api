@@ -14,6 +14,7 @@ const messageObj = {
   message: {
     type: String,
     required: true,
+    maxlength: [500, 'Message cannot be more than 500 characters']
   },
   updatedAt: {
     type: Date,
@@ -40,4 +41,4 @@ MessageSchema.virtual('targetInfo', {
   justOne: true
 });
 
-module.exports = mongoose.model('View', MessageSchema);
+module.exports = mongoose.model('Message', MessageSchema);
