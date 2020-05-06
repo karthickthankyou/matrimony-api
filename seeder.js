@@ -38,7 +38,6 @@ const importData = async () => {
     await Profile.create(profiles);
     await Activity.create(activities);
     console.log('Data Created...');
-    process.exit();
   } catch (err) {
     console.error(err);
   }
@@ -51,7 +50,6 @@ const deleteData = async () => {
     await Profile.deleteMany();
     await Activity.deleteMany();
     console.log('Data Destroyed...');
-    process.exit();
   } catch (err) {
     console.error(err);
   }
